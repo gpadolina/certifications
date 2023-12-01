@@ -33,7 +33,7 @@ Lily has set a clear goal: Design marketing strategies aimed at converting casua
 * **Data source** - Cyclistic's historical data can be downloaded [here](https://divvy-tripdata.s3.amazonaws.com/index.html), made available by Motivate International inc under this [license](https://divvybikes.com/data-license-agreement) and by Google. I have chosen to use data from April 2020 through March 2021. This comes in a CSV format that can be processed in Excel, Google Sheets, or programming softwares such as R. While processing the data, I noticed that there are nulls or missing values in multiple attributes that has been removed during analysis and data visualization. Note that some of the files might be too large to process in Sheets or Excel. This is public data that one can use to explore bike rides from Cyclistic.
 
 ### Process
-In this phase, I have performed data wrangling including renaming column values and deriving new ones from existing columns. See more below.
+In this phase, I have performed data wrangling including renaming column values, deriving new ones from existing columns, and more. See below.
 ```
 apr_2020 <- rename(apr_2020,
                      trip_id = ride_id,
@@ -108,4 +108,155 @@ I've omitted the rest of the code but the same transformation was done in each d
 all_trips <- bind_rows(apr_2020, may_2020, jun_2020, jul_2020, 
                        aug_2020, sep_2020, oct_2020, nov_2020, 
                        dec_2020, jan_2021, feb_2021, mar_2021)
+```
+
+```
+colnames(all_trips) # list of column names
+nrow(all_trips) # how many rows are in the data frame
+dim(all_trips) # dimensions of the data frame
+head(all_trips) # see the first six rows
+tail(all_trips)
+str(all_trips) # inspect the columns and data types
+summary(all_trips) # statistical summary of data
+```
+
+```
+all_trips$date <- as.Date(all_trips$start_time) # the default format is yyyy-mm-dd
+all_trips$month <- format(as.Date(all_trips$date), "%m")
+all_trips$day <- format(as.Date(all_trips$date), "%d")
+all_trips$year <- format(as.Date(all_trips$date), "%Y")
+all_trips$day_of_week <- format(as.Date(all_trips$date), "%A")
+
+all_trips$ride_length <- difftime(all_trips$end_time, all_trips$start_time)
+str(all_trips$ride_length)
+is.factor(all_trips$ride_length)
+all_trips$ride_length <- as.numeric(as.character(all_trips$ride_length))
+is.numeric(all_trips$ride_length)
+```
+
+```
+# remove bad data including bikes that were taken out of docks for quality check
+# or ride length was negative
+all_trips_v2 <- all_trips[!(all_trips$from_station_name == "HQ QR" | all_trips$ride_length < 0),]
+head(all_trips_v2)
+```
+
+### Analysis
+In this phase, I performed calculations to identify trends and relationships and conducted descriptive analysis. Earlier, I mentioned that there were some nulls or empty values in multiple columns and those are removed whenever appropriate. R is my tool of choice because it's more efficient to manipulate and analyze data there compared to spreadsheets like Excel in this case.
+```
+table(all_trips_v2$usertype)
+```
+| casual | member |
+| ------ | ------ |
+| 1380623 | 1976445|
+
+```
+nrow(all_trips_v2)
+3479196
+```
+
+```
+all_trips_v2 %>% 
+  summarise(mean = mean(all_trips_v2$ride_length, na.rm = TRUE),
+            median = median(all_trips_v2$ride_length, na.rm = TRUE),
+            max = max(all_trips_v2$ride_length, na.rm = TRUE),
+            min = min(all_trips_v2$ride_length, na.rm = TRUE))
+
+OR
+
+summary(all_trips_v2$ride_length)
+```
+In seconds
+| Min | 1st Quartile | Median | Mean | 3rd Quartile | Max | NAs |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | 483 | 884 | 1704 | 1616 | 3523202 | 122128 | 
+
+```
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$usertype, FUN = mean)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$usertype, FUN = median)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$usertype, FUN = max)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$usertype, FUN = min)
+```
+
+| User type | Ride length in seconds | Statistic |
+| --- | --- | --- |
+| casual | 2749.376 | mean |
+| member | 973.974 | mean | 
+| casual | 1293 | median |
+| member | 695 | median | 
+| casual | 3341033 | max |
+| member | 3523202 | max | 
+| casual | 0 | min |
+| member | 0 | min | 
+
+```
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$usertype + all_trips_v2$day_of_week, FUN = mean)
+```
+
+| User type | Day | Ride length in seconds |
+| --- | --- | --- |
+| casual |	Sunday |	3094.3241	|
+| member |	Sunday |	1103.4337	|
+| casual |	Monday |	2756.5101	|
+| member |	Monday |	927.1667	|
+| casual |	Tuesday |	2480.4720	|
+| member |	Tuesday |	914.0390	|
+| casual |	Wednesday |	2471.3060 |	
+| member |	Wednesday |	923.9081	|
+| casual |	Thursday |	2632.8978	|
+| member |	Thursday |	918.3857	|
+| casual |	Friday |	2617.0818	|
+| member |	Friday |	955.0886	|
+| casual |	Saturday |	2860.8466 |	
+| member |	Saturday |	1076.2081 |
+
+```
+# analyrize ridership data by type and weekday
+all_trips_v2 %>%
+  mutate(weekday = wday(start_time, label = TRUE)) %>% 
+  group_by(usertype, weekday) %>% 
+  summarise(number_of_rides = n(),
+            average = mean(ride_length)) %>% 
+  arrange(usertype, weekday)
+```
+
+| User type | Day | Number of rides | Average | 
+| --- | --- | --- | --- |
+| casual | Sun	| 254988	| 3094.3241	| 
+| casual	| Mon	| 145701	| 2756.5101	| 
+| casual	| Tue	| 139826	| 2480.4720	| 
+| casual	| Wed	| 152370	| 2471.3060	| 
+| casual	| Thu	| 160385	| 2632.8978	| 
+| casual	| Fri	| 201552	| 2617.0818	| 
+| casual	| Sat	| 325801	| 2860.8466	| 
+| member	| Sun	| 255384	| 1103.4337	| 
+| member	| Mon	| 257181	| 927.1667	| 
+| member	| Tue	| 273786	| 914.0390 | 
+| member	| Wed	| 294308	| 923.9081	| 
+| member	| Thu	| 289687	| 918.3857 | 	
+| member	| Fri	| 295085	| 955.0886 | 	
+| member	| Sat	| 311014	| 1076.2081 | 	
+| NA	| NA	| 122128	| NA |
+
+```
+# data visualization
+all_trips_v2 %>% 
+  mutate(weekday = wday(start_time, label = TRUE)) %>% 
+  group_by(usertype, weekday) %>% 
+  summarise(number_of_rides = n(),
+            average_duration = mean(ride_length)) %>% 
+  arrange(usertype, weekday) %>%  
+  ggplot(aes(x = weekday, y = number_of_rides, fill = usertype)) +
+  geom_col(position = "dodge") +
+  ggtitle("Number of Rides by Weekday")
+
+all_trips_v2 %>% 
+  mutate(weekday = wday(start_time, label = TRUE)) %>% 
+  group_by(usertype, weekday) %>% 
+  summarise(number_of_rides = n(),
+            average_duration = mean(ride_length)) %>% 
+  arrange(usertype, weekday) %>%  
+  ggplot(aes(x = weekday, y = average_duration, fill = usertype)) +
+  geom_col(position = "dodge") +
+  ggtitle("Average Ride Duration in Seconds by Weekday")
 ```
