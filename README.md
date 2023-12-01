@@ -263,3 +263,10 @@ all_trips_v2 %>%
 
 ![Viz 1](https://github.com/gpadolina/google_data_analytics_certificate_capstone_project/blob/main/files/Number%20of%20Rides%20by%20Weekday.png)
 ![Viz 2](https://github.com/gpadolina/google_data_analytics_certificate_capstone_project/blob/main/files/Avg%20Ride%20Duration%20in%20Seconds%20by%20Weekday.png)
+
+### Share
+In this phase, I chose Tableau to create some data visualization. See [here](https://github.com/gpadolina/google_data_analytics_certificate_capstone_project/blob/main/files/Cyclistic%20Bike%20Rides%20using%20Tableau%20Desktop.pdf) if the pdf version doesnt load on this page.
+![Data Viz](https://github.com/gpadolina/google_data_analytics_certificate_capstone_project/blob/main/files/Cyclistic%20Bike%20Rides%20using%20Tableau%20Desktop.pdf)
+
+### Conclusion/Act
+* Overall, there are more annual members than casual riders.
