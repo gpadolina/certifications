@@ -260,3 +260,6 @@ all_trips_v2 %>%
   geom_col(position = "dodge") +
   ggtitle("Average Ride Duration in Seconds by Weekday")
 ```
+
+![Viz 1](https://github.com/gpadolina/google_data_analytics_certificate_capstone_project/blob/main/files/Number%20of%20Rides%20by%20Weekday.png)
+![Viz 2](https://github.com/gpadolina/google_data_analytics_certificate_capstone_project/blob/main/files/Avg%20Ride%20Duration%20in%20Seconds%20by%20Weekday.png)
