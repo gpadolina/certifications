@@ -13,14 +13,6 @@ I am a data analyst working in the marketing team at Cyclistic, a fictional bike
 * **Casual riders** - Customers who purchase single-ride or full-day passes are referred to as casual riders.
 * **Cyclistic members** - Customers who purchase annual memberships are Cyclistic members.
 
-### Goal
-Lily has set a clear goal: Design marketing strategies aimed at converting casual riders into annual members. In order to do that, however, the marketing analytics team needs to better understand how annual members and casual riders differe, why casual riders would buy a membership, and how digital media could affect their marketing tactics. Lily and the team are interested in analytics the historical bike trip to identify trends.
-
-### Ask
-* How do annual members and casual riders use bikes differently?
-* Why would causal riders buy annual memberships?
-* How can Cyclistic use digital media to influence casual riders to become members?
-
 ### Data analysis process
 * **Ask** - Clearly define the problem or question you are trying to solve with data. This involves understanding the context and objectives of the analysis, as well as identifying the stakeholders and their needs.
 * **Prepare** - - Gather and prepare the data. This may involve collecting data from various sources, cleaning and transforming data, and ensuring that it is of sufficient quality for analysis.
@@ -29,5 +21,222 @@ Lily has set a clear goal: Design marketing strategies aimed at converting casua
 * **Share** - The sharing pahse involves communicating the results of the analysis to stakeholders. This may involve creating reports, presentations, and dashboards to effectively convey the findings of the analysis.
 * **Act** - The final phase involves taking action based on the insights gained from the analysis. This may involve making decisions, implementing changes, or developing new strategies.
 
-### Data sources
-Cyclistic's historical data can be downloaded [here](https://divvy-tripdata.s3.amazonaws.com/index.html), made available by Motivate International inc under this [license](https://divvybikes.com/data-license-agreement) and by Google.
+### Goal
+Lily has set a clear goal: Design marketing strategies aimed at converting casual riders into annual members. In order to do that, however, the marketing analytics team needs to better understand how annual members and casual riders differe, why casual riders would buy a membership, and how digital media could affect their marketing tactics. Lily and the team are interested in analytics the historical bike trip to identify trends.
+
+### Ask
+* How do annual members and casual riders use bikes differently?
+* Why would causal riders buy annual memberships?
+* How can Cyclistic use digital media to influence casual riders to become members?
+
+### Prepare
+* **Data source** - Cyclistic's historical data can be downloaded [here](https://divvy-tripdata.s3.amazonaws.com/index.html), made available by Motivate International inc under this [license](https://divvybikes.com/data-license-agreement) and by Google. I have chosen to use data from April 2020 through March 2021. This comes in a CSV format that can be processed in Excel, Google Sheets, or programming softwares such as R. While processing the data, I noticed that there are nulls or missing values in multiple attributes that has been removed during analysis and data visualization. Note that some of the files might be too large to process in Sheets or Excel. This is public data that one can use to explore bike rides from Cyclistic.
+
+### Process
+In this phase, I have performed data wrangling including renaming column values and deriving new ones from existing columns. See more below.
+```
+apr_2020 <- rename(apr_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+may_2020 <- rename(may_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+jun_2020 <- rename(jun_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+jul_2020 <- rename(jul_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+aug_2020 <- rename(aug_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+sep_2020 <- rename(sep_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+oct_2020 <- rename(oct_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+nov_2020 <- rename(nov_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+dec_2020 <- rename(dec_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+jan_2021 <- rename(jan_2021,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+feb_2021 <- rename(feb_2021,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+mar_2021 <- rename(mar_2021,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+```
+
+```
+# inspect the data frames
+str(apr_2020)
+str(may_2020)
+str(jun_2020)
+str(jul_2020)
+str(aug_2020)
+str(sep_2020)
+str(oct_2020)
+str(nov_2020)
+str(dec_2020)
+str(jan_2021)
+str(feb_2021)
+str(mar_2021)
+```
+
+```
+apr_2020 <- mutate(apr_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+may_2020 <- mutate(may_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+jun_2020 <- mutate(jun_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+jul_2020 <- mutate(jul_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+aug_2020 <- mutate(aug_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+sep_2020 <- mutate(sep_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+oct_2020 <- mutate(oct_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+nov_2020 <- mutate(nov_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+dec_2020 <- mutate(dec_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+jan_2021 <- mutate(jan_2021, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+feb_2021 <- mutate(feb_2021, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+mar_2021 <- mutate(mar_2021, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+```
+
+```
+# combine all rows into one big data frame
+all_trips <- bind_rows(apr_2020, may_2020, jun_2020, jul_2020, 
+                       aug_2020, sep_2020, oct_2020, nov_2020, 
+                       dec_2020, jan_2021, feb_2021, mar_2021)
+```
