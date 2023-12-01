@@ -68,104 +68,7 @@ jun_2020 <- rename(jun_2020,
                      to_station_id = end_station_id,
                      usertype = member_casual)
 
-jul_2020 <- rename(jul_2020,
-                     trip_id = ride_id,
-                     bikeid = rideable_type,
-                     start_time = started_at,
-                     end_time = ended_at,
-                     from_station_name = start_station_name,
-                     from_station_id = start_station_id,
-                     to_station_name = end_station_name,
-                     to_station_id = end_station_id,
-                     usertype = member_casual)
-
-aug_2020 <- rename(aug_2020,
-                     trip_id = ride_id,
-                     bikeid = rideable_type,
-                     start_time = started_at,
-                     end_time = ended_at,
-                     from_station_name = start_station_name,
-                     from_station_id = start_station_id,
-                     to_station_name = end_station_name,
-                     to_station_id = end_station_id,
-                     usertype = member_casual)
-
-sep_2020 <- rename(sep_2020,
-                     trip_id = ride_id,
-                     bikeid = rideable_type,
-                     start_time = started_at,
-                     end_time = ended_at,
-                     from_station_name = start_station_name,
-                     from_station_id = start_station_id,
-                     to_station_name = end_station_name,
-                     to_station_id = end_station_id,
-                     usertype = member_casual)
-
-oct_2020 <- rename(oct_2020,
-                     trip_id = ride_id,
-                     bikeid = rideable_type,
-                     start_time = started_at,
-                     end_time = ended_at,
-                     from_station_name = start_station_name,
-                     from_station_id = start_station_id,
-                     to_station_name = end_station_name,
-                     to_station_id = end_station_id,
-                     usertype = member_casual)
-
-nov_2020 <- rename(nov_2020,
-                     trip_id = ride_id,
-                     bikeid = rideable_type,
-                     start_time = started_at,
-                     end_time = ended_at,
-                     from_station_name = start_station_name,
-                     from_station_id = start_station_id,
-                     to_station_name = end_station_name,
-                     to_station_id = end_station_id,
-                     usertype = member_casual)
-
-dec_2020 <- rename(dec_2020,
-                     trip_id = ride_id,
-                     bikeid = rideable_type,
-                     start_time = started_at,
-                     end_time = ended_at,
-                     from_station_name = start_station_name,
-                     from_station_id = start_station_id,
-                     to_station_name = end_station_name,
-                     to_station_id = end_station_id,
-                     usertype = member_casual)
-
-jan_2021 <- rename(jan_2021,
-                     trip_id = ride_id,
-                     bikeid = rideable_type,
-                     start_time = started_at,
-                     end_time = ended_at,
-                     from_station_name = start_station_name,
-                     from_station_id = start_station_id,
-                     to_station_name = end_station_name,
-                     to_station_id = end_station_id,
-                     usertype = member_casual)
-
-feb_2021 <- rename(feb_2021,
-                     trip_id = ride_id,
-                     bikeid = rideable_type,
-                     start_time = started_at,
-                     end_time = ended_at,
-                     from_station_name = start_station_name,
-                     from_station_id = start_station_id,
-                     to_station_name = end_station_name,
-                     to_station_id = end_station_id,
-                     usertype = member_casual)
-
-mar_2021 <- rename(mar_2021,
-                     trip_id = ride_id,
-                     bikeid = rideable_type,
-                     start_time = started_at,
-                     end_time = ended_at,
-                     from_station_name = start_station_name,
-                     from_station_id = start_station_id,
-                     to_station_name = end_station_name,
-                     to_station_id = end_station_id,
-                     usertype = member_casual)
+I've omitted the rest of the code but the same transformation was done in each data frame before they were bind together.
 ```
 
 ```
@@ -197,41 +100,7 @@ jun_2020 <- mutate(jun_2020,
                    trip_id = as.character(trip_id),
                    bikeid = as.character(bikeid))
 
-jul_2020 <- mutate(jul_2020, 
-                   trip_id = as.character(trip_id),
-                   bikeid = as.character(bikeid))
-
-aug_2020 <- mutate(aug_2020, 
-                   trip_id = as.character(trip_id),
-                   bikeid = as.character(bikeid))
-
-sep_2020 <- mutate(sep_2020, 
-                   trip_id = as.character(trip_id),
-                   bikeid = as.character(bikeid))
-
-oct_2020 <- mutate(oct_2020, 
-                   trip_id = as.character(trip_id),
-                   bikeid = as.character(bikeid))
-
-nov_2020 <- mutate(nov_2020, 
-                   trip_id = as.character(trip_id),
-                   bikeid = as.character(bikeid))
-
-dec_2020 <- mutate(dec_2020, 
-                   trip_id = as.character(trip_id),
-                   bikeid = as.character(bikeid))
-
-jan_2021 <- mutate(jan_2021, 
-                   trip_id = as.character(trip_id),
-                   bikeid = as.character(bikeid))
-
-feb_2021 <- mutate(feb_2021, 
-                   trip_id = as.character(trip_id),
-                   bikeid = as.character(bikeid))
-
-mar_2021 <- mutate(mar_2021, 
-                   trip_id = as.character(trip_id),
-                   bikeid = as.character(bikeid))
+I've omitted the rest of the code but the same transformation was done in each data frame before they were bind together.
 ```
 
 ```
