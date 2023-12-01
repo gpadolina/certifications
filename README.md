@@ -273,7 +273,7 @@ In this phase, I chose Tableau to create some data visualization. See [here](htt
 * Streeter Dr and Grand Ave is the most popular as the start and end locations. Probably because it's downtown and next to Lake Michigan.
 * Bike trips peaked during the summer right around August and bottomed during the winter around February. This can be due the combination of the weather and tourism.
 
-** Recommendations**
+**Recommendations**
 * Marketing campaigns should be launch around 2pm to 5pm.
 * Target Streeter Dr/Grand Ave and Millenium Park because it's popular for casual riders.
 * Highlight promotions to upgrade to annual membership from casual riding.
