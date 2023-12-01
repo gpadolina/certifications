@@ -265,8 +265,16 @@ all_trips_v2 %>%
 ![Viz 2](https://github.com/gpadolina/google_data_analytics_certificate_capstone_project/blob/main/files/Avg%20Ride%20Duration%20in%20Seconds%20by%20Weekday.png)
 
 ### Share
-In this phase, I chose Tableau to create some data visualization. See [here](https://github.com/gpadolina/google_data_analytics_certificate_capstone_project/blob/main/files/Cyclistic%20Bike%20Rides%20using%20Tableau%20Desktop.pdf) if the pdf version doesnt load on this page.
-![Data Viz](https://github.com/gpadolina/google_data_analytics_certificate_capstone_project/blob/main/files/Cyclistic%20Bike%20Rides%20using%20Tableau%20Desktop.pdf)
+In this phase, I chose Tableau to create some data visualization. See [here](https://github.com/gpadolina/google_data_analytics_certificate_capstone_project/blob/main/files/Cyclistic%20Bike%20Rides%20using%20Tableau%20Desktop.pdf) for a pdf version.
 
-### Conclusion/Act
-* Overall, there are more annual members than casual riders.
+### Conclusion
+* Overall, there are more bike trips taken by annual members than casual riders.
+* On weekdays, 5pm seems to be the most popular to ride for both customer types. On weekends, it is around 2pm.
+* Streeter Dr and Grand Ave is the most popular as the start and end locations. Probably because it's downtown and next to Lake Michigan.
+* Bike trips peaked during the summer right around August and bottomed during the winter around February. This can be due the combination of the weather and tourism.
+
+** Recommendations**
+* Marketing campaigns should be launch around 2pm to 5pm.
+* Target Streeter Dr/Grand Ave and Millenium Park because it's popular for casual riders.
+* Highlight promotions to upgrade to annual membership from casual riding.
+* Promote benefits of bike riding for one's health and the environment.
