@@ -1,0 +1,383 @@
+---
+title: "Google Data Analytics Project"
+output: html_document
+date: "2023-11-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+```
+
+## Load libraries
+
+```{r}
+library(tidyverse) # helps wrangle data
+library(lubridate) # helps wrangle datatime attributes
+library(ggplot2) # helps visualize data
+setwd("~/Cyclistic Data") # sets working directory
+getwd()
+```
+
+## Step 1: Collect data
+
+```{r}
+# load the data
+apr_2020 <- read_csv("202004-divvy-tripdata.csv", show_col_types = FALSE)
+may_2020 <- read_csv("202005-divvy-tripdata.csv", show_col_types = FALSE)
+jun_2020 <- read_csv("202006-divvy-tripdata.csv", show_col_types = FALSE)
+jul_2020 <- read_csv("202007-divvy-tripdata.csv", show_col_types = FALSE)
+aug_2020 <- read_csv("202008-divvy-tripdata.csv", show_col_types = FALSE)
+sep_2020 <- read_csv("202009-divvy-tripdata.csv", show_col_types = FALSE)
+oct_2020 <- read_csv("202010-divvy-tripdata.csv", show_col_types = FALSE)
+nov_2020 <- read_csv("202011-divvy-tripdata.csv", show_col_types = FALSE)
+dec_2020 <- read_csv("202012-divvy-tripdata.csv", show_col_types = FALSE)
+jan_2021 <- read_csv("202101-divvy-tripdata.csv", show_col_types = FALSE)
+feb_2021 <- read_csv("202102-divvy-tripdata.csv", show_col_types = FALSE)
+mar_2021 <- read_csv("202103-divvy-tripdata.csv", show_col_types = FALSE)
+```
+
+## Step 2: Wrangle data and combine into single file
+
+```{r}
+# compare column names of each files
+colnames(apr_2020)
+colnames(may_2020)
+colnames(jun_2020)
+colnames(jul_2020)
+colnames(aug_2020)
+colnames(sep_2020)
+colnames(oct_2020)
+colnames(nov_2020)
+colnames(dec_2020)
+colnames(jan_2021)
+colnames(feb_2021)
+colnames(mar_2021)
+
+```
+
+```{r}
+# rename columns to make them consistent
+apr_2020 <- rename(apr_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+may_2020 <- rename(may_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+jun_2020 <- rename(jun_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+jul_2020 <- rename(jul_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+aug_2020 <- rename(aug_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+sep_2020 <- rename(sep_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+oct_2020 <- rename(oct_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+nov_2020 <- rename(nov_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+dec_2020 <- rename(dec_2020,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+jan_2021 <- rename(jan_2021,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+feb_2021 <- rename(feb_2021,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+mar_2021 <- rename(mar_2021,
+                     trip_id = ride_id,
+                     bikeid = rideable_type,
+                     start_time = started_at,
+                     end_time = ended_at,
+                     from_station_name = start_station_name,
+                     from_station_id = start_station_id,
+                     to_station_name = end_station_name,
+                     to_station_id = end_station_id,
+                     usertype = member_casual)
+
+```
+
+```{r}
+# inspect the data frames
+str(apr_2020)
+str(may_2020)
+str(jun_2020)
+str(jul_2020)
+str(aug_2020)
+str(sep_2020)
+str(oct_2020)
+str(nov_2020)
+str(dec_2020)
+str(jan_2021)
+str(feb_2021)
+str(mar_2021)
+
+```
+
+```{r}
+apr_2020 <- mutate(apr_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+may_2020 <- mutate(may_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+jun_2020 <- mutate(jun_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+jul_2020 <- mutate(jul_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+aug_2020 <- mutate(aug_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+sep_2020 <- mutate(sep_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+oct_2020 <- mutate(oct_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+nov_2020 <- mutate(nov_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+dec_2020 <- mutate(dec_2020, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+jan_2021 <- mutate(jan_2021, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+feb_2021 <- mutate(feb_2021, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+mar_2021 <- mutate(mar_2021, 
+                   trip_id = as.character(trip_id),
+                   bikeid = as.character(bikeid))
+
+```
+
+```{r}
+# combine all rows into one big data frame
+all_trips <- bind_rows(apr_2020, may_2020, jun_2020, jul_2020, 
+                       aug_2020, sep_2020, oct_2020, nov_2020, 
+                       dec_2020, jan_2021, feb_2021, mar_2021)
+
+# write out a csv of all_trips
+library(data.table)
+fwrite(all_trips, file = "all_trips.csv")
+
+```
+
+## Step 3: Clean up and add data to prepare for analysis
+
+```{r}
+colnames(all_trips) # list of column names
+nrow(all_trips) # how many rows are in the data frame
+dim(all_trips) # dimensions of the data frame
+head(all_trips) # see the first six rows
+tail(all_trips)
+str(all_trips) # inspect the columns and data types
+summary(all_trips) # statistical summary of data
+```
+
+```{r}
+# data cleaning
+table(all_trips_v2$usertype)
+
+# all_trips <- all_trips %>% 
+#   mutate(usertype = recode(usertype,
+#                            "Subscriber" = "member",
+#                            "Customer" = "casual"))
+
+all_trips$date <- as.Date(all_trips$start_time) # the default format is yyyy-mm-dd
+all_trips$month <- format(as.Date(all_trips$date), "%m")
+all_trips$day <- format(as.Date(all_trips$date), "%d")
+all_trips$year <- format(as.Date(all_trips$date), "%Y")
+all_trips$day_of_week <- format(as.Date(all_trips$date), "%A")
+
+all_trips$ride_length <- difftime(all_trips$end_time, all_trips$start_time)
+str(all_trips$ride_length)
+is.factor(all_trips$ride_length)
+all_trips$ride_length <- as.numeric(as.character(all_trips$ride_length))
+is.numeric(all_trips$ride_length)
+```
+
+```{r}
+# remove bad data including bikes that were taken out of docks for quality check
+# or ride length was negative
+all_trips_v2 <- all_trips[!(all_trips$from_station_name == "HQ QR" | all_trips$ride_length < 0),]
+head(all_trips_v2)
+```
+
+## Step 4: Conduct descriptive analysis
+
+```{r}
+all_trips_v2 %>% 
+  summarise(mean = mean(all_trips_v2$ride_length, na.rm = TRUE),
+            median = median(all_trips_v2$ride_length, na.rm = TRUE),
+            max = max(all_trips_v2$ride_length, na.rm = TRUE),
+            min = min(all_trips_v2$ride_length, na.rm = TRUE))
+
+summary(all_trips_v2$ride_length)
+```
+
+```{r}
+# compare members and casual users
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$usertype, FUN = mean)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$usertype, FUN = median)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$usertype, FUN = max)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$usertype, FUN = min)
+
+# average ride time by each day for members vs casual users
+all_trips_v2$day_of_week <- ordered(all_trips_v2$day_of_week, 
+                                    levels=c("Sunday", "Monday", "Tuesday",
+                                            "Wednesday", "Thursday",
+                                            "Friday", "Saturday"))
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$usertype + all_trips_v2$day_of_week, FUN = mean)
+
+```
+
+```{r}
+# analyrize ridership data by type and weekday
+all_trips_v2 %>%
+  mutate(weekday = wday(start_time, label = TRUE)) %>% 
+  group_by(usertype, weekday) %>% 
+  summarise(number_of_rides = n(),
+            average = mean(ride_length)) %>% 
+  arrange(usertype, weekday)
+
+```
+
+```{r}
+# visualization
+
+all_trips_v2 %>% 
+  mutate(weekday = wday(start_time, label = TRUE)) %>% 
+  group_by(usertype, weekday) %>% 
+  summarise(number_of_rides = n(),
+            average_duration = mean(ride_length)) %>% 
+  arrange(usertype, weekday) %>%  
+  ggplot(aes(x = weekday, y = number_of_rides, fill = usertype)) +
+  geom_col(position = "dodge") +
+  ggtitle("Number of Rides by Weekday")
+
+
+all_trips_v2 %>% 
+  mutate(weekday = wday(start_time, label = TRUE)) %>% 
+  group_by(usertype, weekday) %>% 
+  summarise(number_of_rides = n(),
+            average_duration = mean(ride_length)) %>% 
+  arrange(usertype, weekday) %>%  
+  ggplot(aes(x = weekday, y = average_duration, fill = usertype)) +
+  geom_col(position = "dodge") +
+  ggtitle("Average Ride Duration in Seconds by Weekday")
+```
+
+## Export files
+```{r}
+fwrite(all_trips_v2, file = "all_trips_v2.csv")
+
+```
